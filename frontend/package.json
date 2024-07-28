@@ -2,7 +2,7 @@
     "name": "frontend",
     "private": true,
     "version": "0.0.0",
-    "proxy": "http://localhost:5000",
+    "proxy": "https://mern-chat-app-xz14.onrender.com",
     "scripts": {
         "dev": "vite",
         "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { ChatState } from "../../context/ChatProvider";
 import { getSender } from "../../config/ChatLogic";
 import GroupChatModal from "./GroupChatModal";
-import ChatLoading from "./ChatLoading"; // Ensure this component is imported
+import ChatLoading from "./ChatLoading"; 
 
 const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
@@ -14,6 +14,18 @@ const MyChats = ({ fetchAgain }) => {
   const toast = useToast();
 
   const fetchChats = async () => {
+    if (!user || !user.token) {
+      toast({
+        title: "Error Occurred!",
+        description: "User authentication failed",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom-left",
+      });
+      return;
+    }
+
     try {
       const config = {
         headers: {
@@ -21,7 +33,7 @@ const MyChats = ({ fetchAgain }) => {
         },
       };
 
-      const { data } = await axios.get("/api/chat", config);
+      const { data } = await axios.get("https://mern-chat-app-xz14.onrender.com/api/chat", config);
       setChats(data);
     } catch (error) {
       toast({
@@ -36,13 +48,16 @@ const MyChats = ({ fetchAgain }) => {
   };
 
   useEffect(() => {
-    setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
+    const storedUserInfo = localStorage.getItem("userInfo");
+    if (storedUserInfo) {
+      setLoggedUser(JSON.parse(storedUserInfo));
+    }
     fetchChats();
   }, [fetchAgain]);
 
   return (
     <Box
-      d={{ base: selectedChat ? "none" : "flex", md: "flex" }}
+      display={{ base: selectedChat ? "none" : "flex", md: "flex" }}
       flexDir="column"
       alignItems="center"
       p={3}
@@ -102,7 +117,7 @@ const MyChats = ({ fetchAgain }) => {
                 </Text>
                 {chat.latestMessage && (
                   <Text fontSize="xs">
-                    <b>{chat.latestMessage.sender.name} : </b>
+                    <b>{chat.latestMessage.sender?.name || "Unknown"}: </b>
                     {chat.latestMessage.content.length > 50
                       ? chat.latestMessage.content.substring(0, 51) + "..."
                       : chat.latestMessage.content}
