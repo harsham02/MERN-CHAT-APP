@@ -1,0 +1,9 @@
+  
+  .home-container {
+    background: linear-gradient(to right, #315f28, #173f1a);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  

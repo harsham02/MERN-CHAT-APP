@@ -1,0 +1,16 @@
+.scrollable-chat-container {
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.chat-box {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
