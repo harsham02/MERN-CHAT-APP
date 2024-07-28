@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Tooltip, Button, Box, Text, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Avatar, Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure, Flex, Input, useToast,
   Spinner
@@ -10,7 +10,8 @@ import { ChatState } from '../../context/ChatProvider';
 import { useNavigate } from 'react-router-dom';
 import ChatLoading from './ChatLoading';
 import axios from 'axios';
-import NotificationBadge, { Effect } from 'react-notification-badge';
+import { ReactNotifications, Store } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 import UserListItem from '../userAvatar/UserListItem';
 import { getSender } from '../../config/ChatLogic';
 
@@ -100,6 +101,24 @@ const SideDrawer = () => {
     }
   };
 
+  useEffect(() => {
+    notification.forEach((noti) => {
+      Store.addNotification({
+        title: noti.chat.isGroupChat ? `New message in ${noti.chat.chatName}` : `New message from ${getSender(user, noti.chat.users)}`,
+        message: noti.content,
+        type: "info", // success | danger | info | default | warning
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        }
+      });
+    });
+  }, [notification]);
+
   return (
     <Box
       display="flex"
@@ -123,22 +142,18 @@ const SideDrawer = () => {
       <div>
         <Menu>
           <MenuButton p={1}>
-             <NotificationBadge
-              count={notification.length}
-              effect={Effect.SCALE}
-            /> 
             <BellIcon fontSize="2xl" m={1} />
           </MenuButton>
           <MenuList pl={2}>
-            {!notification.length && "no new messages"}
+            {!notification.length && "No new messages"}
             {notification.map((noti) => (
               <MenuItem key={noti._id}
               onClick={() => {setSelectedChat(noti.chat);
                 setNotification(notification.filter((n) => n._id !== noti._id))
               }}>
                 {noti.chat.isGroupChat
-                 ? `new message in ${noti.chat.chatName}`
-                 : `new message from ${getSender(user, noti.chat.users)}`}
+                 ? `New message in ${noti.chat.chatName}`
+                 : `New message from ${getSender(user, noti.chat.users)}`}
               </MenuItem>
             ))}
           </MenuList>
@@ -160,7 +175,6 @@ const SideDrawer = () => {
           </MenuList>
         </Menu>
       </div>
-      {/* Closing the Drawer component properly */}
       <Drawer placement='left' onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
@@ -187,10 +201,11 @@ const SideDrawer = () => {
                 />
               ))
             )}
-            {loadingChat && <Spinner ml = 'auto' display="flex"/>}
+            {loadingChat && <Spinner ml='auto' display="flex" />}
           </DrawerBody>
         </DrawerContent>
       </Drawer>
+      <ReactNotifications />
     </Box>
   );
 };

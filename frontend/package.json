@@ -1,39 +1,36 @@
 {
-  "name": "frontend",
-  "private": true,
-  "version": "0.0.0",
-  "proxy": "http://localhost:5000",
-  "scripts": {
-    "dev": "vite",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "start": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts --openssl-legacy-provider build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@chakra-ui/icons": "^2.1.1",
-    "@chakra-ui/react": "^2.8.2",
-    "@emotion/react": "^11.13.0",
-    "@emotion/styled": "^11.13.0",
-    "axios": "^1.7.2",
-    "framer-motion": "^11.3.19",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-icons": "^5.2.1",
-    "react-lottie": "^1.2.4",
-    "react-notification-badge": "^1.5.1",
-    "react-router": "^6.25.1",
-    "react-router-dom": "^6.25.1",
-    "socket.io-client": "^4.7.5"
-  },
-  "devDependencies": {
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react-swc": "^3.7.0",
-    "eslint": "^9.8.0",
-    "eslint-plugin-react": "^7.35.0",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-react-refresh": "^0.4.9",
-    "vite": "^5.3.5"
-  }
+    "name": "frontend",
+    "private": true,
+    "version": "0.0.0",
+    "proxy": "http://localhost:5000",
+    "scripts": {
+        "dev": "vite",
+        "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+        "start": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@chakra-ui/icons": "^2.1.1",
+        "@chakra-ui/react": "^2.8.2",
+        "@emotion/react": "^11.13.0",
+        "@emotion/styled": "^11.13.0",
+        "axios": "^1.7.2",
+        "framer-motion": "^11.3.19",
+        "lottie-react": "^2.4.0",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-icons": "^5.2.1",
+        "react-notifications-component": "^4.0.1",
+        "react-router": "^6.25.1",
+        "react-router-dom": "^6.25.1",
+        "socket.io-client": "^4.7.5"
+    },
+    "devDependencies": {
+        "@types/react": "^18.3.3",
+        "@types/react-dom": "^18.3.0",
+        "@vitejs/plugin-react-swc": "^3.7.0",
+        "eslint-plugin-react": "^7.35.0",
+        "vite": "^5.3.5"
+    }
 }

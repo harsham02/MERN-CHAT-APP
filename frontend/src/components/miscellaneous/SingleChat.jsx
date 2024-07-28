@@ -7,9 +7,9 @@ import ProfileModal from "./ProfileModal";
 import UpdateGroupChatModal from "./UpdateGroupChatModal";
 import ScrollableChat from "./ScrollableChat";
 import { getSender, getSenderFull } from "../../config/ChatLogic";
-import Lottie from 'react-lottie';
+import Lotiee from 'lottie-react';
 import io from 'socket.io-client';
-import './Styles.css'
+import './Styles.css';
 import { IoMdSend } from "react-icons/io";
 import animationData from '../../animation/typing.json';
 
@@ -231,9 +231,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             )}
 
             <FormControl id="first-name" isRequired mt={3}>
-              {isTyping && !typing && (
+              {isTyping && (
                 <div>
-                  <Lottie
+                  <Lotiee
                     options={defaultOptions}
                     width={70}
                     style={{ marginBottom: 15, marginLeft: 0 }}
