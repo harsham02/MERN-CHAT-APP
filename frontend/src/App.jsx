@@ -5,7 +5,7 @@ import Home from './pages/Home'
 import Chat from './pages/Chat'
 
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
     <Routes>
